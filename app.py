@@ -10,7 +10,10 @@ from langchain.agents import AgentExecutor, create_tool_calling_agent
 from langchain_core.tools import tool
 from langchain_openai import ChatOpenAI
 
-llm = ChatOpenAI(model=os.environ['MODEL'])
+llm = ChatOpenAI(
+    temperature=0.1,
+    model=os.environ['MODEL']
+)
 
 @tool
 def current_date() -> date:

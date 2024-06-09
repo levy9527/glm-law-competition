@@ -1,4 +1,6 @@
 import os
+from datetime import date
+
 from langchain_core.tools import tool
 
 import requests
@@ -107,3 +109,9 @@ def search_case_num_by_legal_document(key: str, value: str):
 
   rsp = requests.post(url, json=data, headers=headers)
   return rsp.json()
+
+@tool
+def current_date() -> date:
+  """get the current date"""
+  today = date.today()
+  return today

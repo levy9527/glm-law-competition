@@ -7,9 +7,11 @@ import requests
 from dotenv import load_dotenv
 load_dotenv()
 domain = os.environ['API_DOMAIN']
+token = os.environ['TEAM_TOKEN']
 
 headers = {
-  'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    'Authorization': f'Bearer {token}'
 }
 
 @tool
@@ -25,7 +27,8 @@ def get_company_info(company_name: str):
 
 @tool
 def search_company_name_by_info(key: str, value: str):
-  '''根据公司基本信息某个字段是某个值来查询具体的公司名称'''
+  '''根据公司基本信息，查询具体的公司名称
+  '''
   url = f"https://{domain}/law_api/search_company_name_by_info"
   data = {
     "key": key,
@@ -50,7 +53,9 @@ def get_company_register(company_name: str):
 
 @tool
 def search_company_name_by_register(key: str, value: str):
-  '''根据公司注册信息某个字段是某个值来查询具体的公司名称'''
+  '''根据公司注册信息，查询具体的公司名称
+     示例：根据注册号查找公司名称. key: 注册号, value: 320512400000458
+  '''
   url = f"https://{domain}/law_api/search_company_name_by_register"
   data = {
     "key": key,
@@ -110,8 +115,8 @@ def search_case_num_by_legal_document(key: str, value: str):
   rsp = requests.post(url, json=data, headers=headers)
   return rsp.json()
 
-@tool
-def current_date() -> date:
-  """get the current date"""
-  today = date.today()
-  return today
+# @tool
+# def current_date() -> date:
+#   """get the current date"""
+#   today = date.today()
+#   return today

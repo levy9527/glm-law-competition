@@ -30,7 +30,7 @@ def load_functions(file_path):
     
     return functions
 
-api_file_path = 'api.py'
+api_file_path = 'tool.py'
 tools = load_functions(api_file_path)
 
 prompt = ChatPromptTemplate.from_messages([
@@ -50,9 +50,7 @@ if __name__ == '__main__':
     with open('round1/question.json', 'r', encoding='utf-8') as f:
         for line in f.readlines():
             data = json.loads(line)
-            if data['id'] == 1:
+            if data['id'] == 0:
                 answer = agent_executor.invoke({"input": data['question']})["output"]
                 print(answer)
                 break
-    # 输出
-    # 希望有羽毛和翅膀_result.json
